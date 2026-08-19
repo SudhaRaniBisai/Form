@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 mongoose.connect(process.env.MONGO_URL)
     .then(() => {
         console.log("Connected to MongoDB Atlas");
+        console.log("DATABASE NAME:", mongoose.connection.name);
     })
     .catch((err) => {
         console.log("MongoDB connection error:", err);
