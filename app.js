@@ -29,6 +29,8 @@ app.get("/", (req, res) => {
 // Register student
 app.post("/register", async (req, res) => {
     try {
+        console.log("Form data received:", req.body);
+
         const { studentId, name } = req.body;
 
         const student = new Student({
@@ -36,15 +38,16 @@ app.post("/register", async (req, res) => {
             name: name
         });
 
-        await student.save();
+        const savedStudent = await student.save();
+
+        console.log("Student saved:", savedStudent);
 
         res.send("Student registered successfully!");
     } catch (err) {
-        console.log(err);
+        console.log("Error registering student:", err);
         res.status(500).send("Error registering student");
     }
 });
-
 // Server
 const PORT = process.env.PORT || 8080;
 
